@@ -1,25 +1,22 @@
 package util;
 
 import business.Car;
+import com.csvreader.CsvWriter;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.List;
 
 public class FileIO {
 
-    //private CarList carList;
+    private static final String CAR_INFO_CSV = "CarInfo.csv";
 
-    public static ArrayList<Car> readFile(String filename) {
+    public static ArrayList<Car> readFile() {
         ArrayList<Car> data = new ArrayList<>();
-        try (BufferedReader inline = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader inline = new BufferedReader(new FileReader(CAR_INFO_CSV))) {
             String inputline;
             String[] fieldNames;
             while ((inputline = inline.readLine()) != null) {
@@ -43,15 +40,27 @@ public class FileIO {
         return data;
     }
 
-    //temporary
-    public static Date stringToDate(String time) {
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");//日期格式
-        Date date = null;
+    public static void writeFile(List<Car> carList) {
+        CsvWriter csvWriter = new CsvWriter(CAR_INFO_CSV, ',', StandardCharsets.UTF_8);
         try {
-            date = format.parse(time);
-        } catch (ParseException e) {
+            for (Car car : carList) {
+                String[] record = {
+                    car.getSerialNumber(),
+                    car.getStatus(),
+                    car.getBrand(),
+                    car.getManufacturerYear(),
+                    String.valueOf(car.getSeatNumber()),
+                    car.getModelNumber(),
+                    car.getManufacturers(),
+                    car.getCity(),
+                    car.getMaintain(),
+                    car.getUpdateTime()};
+                csvWriter.writeRecord(record);
+            }
+        } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return date;
+        csvWriter.close();
     }
 }

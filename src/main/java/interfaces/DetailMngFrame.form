@@ -43,28 +43,25 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lblStatus" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblSerialNumber" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="statusCheckBoxAvailable" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="statusCheckBoxUnavailable" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblSerialNumber" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblManufacturers" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSerialNumber" alignment="0" pref="184" max="32767" attributes="0"/>
+                          <Component id="txtManufacturers" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lblSeatNumber" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblUpdateTime" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                          <Component id="txtSeatNum" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtUpdate" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="lblManufacturers" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtSerialNumber" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtManufacturers" alignment="0" max="32767" attributes="0"/>
-                      <Component id="lblSeatNumber" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblUpdateTime" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
-                      <Component id="txtSeatNum" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtUpdate" max="32767" attributes="0"/>
+                      <Component id="lblStatus" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="radioAvailable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="radioUnavailable" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="91" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -87,6 +84,19 @@
                   </Group>
                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
+                          <Component id="btnSave" min="-2" pref="85" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -100,8 +110,8 @@
                           <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="statusCheckBoxAvailable" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="statusCheckBoxUnavailable" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="radioUnavailable" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="radioAvailable" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblSerialNumber" min="-2" max="-2" attributes="0"/>
@@ -149,7 +159,9 @@
                       <Component id="txtUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtManufactureYear" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnSave" min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -243,16 +255,6 @@
             <Property name="text" type="java.lang.String" value="Manufacture Year:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="statusCheckBoxAvailable">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="availbale"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="statusCheckBoxUnavailable">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="unavailbale"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="txtModelNumber">
         </Component>
         <Component class="javax.swing.JTextField" name="txtSerialNumber">
@@ -273,11 +275,46 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Unexpired"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="unexpiredCheckBoxStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="expiredCheckBox">
           <Properties>
             <Property name="text" type="java.lang.String" value="Expired"/>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="expiredCheckBoxStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="radioUnavailable">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="unavailable"/>
+          </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="radioUnavailableStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioUnavailableActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="radioAvailable">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="available"/>
+          </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="radioAvailableStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnSave">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Save"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSaveMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

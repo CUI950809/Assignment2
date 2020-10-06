@@ -5,6 +5,8 @@
  */
 package business;
 
+import java.util.Date;
+
 /**
  * @author wangcong
  */
@@ -19,6 +21,24 @@ public class Car {
     private String maintain;
     private String updateTime;
     private String status;
+
+    public static Car copyFrom(Car car) {
+        if (car == null) {
+            return null;
+        }
+        Car copy = new Car();
+        copy.setSerialNumber(car.getSerialNumber());
+        copy.setBrand(car.getBrand());
+        copy.setSeatNumber(car.getSeatNumber());
+        copy.setModelNumber(car.getModelNumber());
+        copy.setManufacturers(car.getManufacturers());
+        copy.setManufacturerYear(car.getManufacturerYear());
+        copy.setCity(car.getCity());
+        copy.setMaintain(car.getMaintain());
+        copy.setUpdateTime(car.getUpdateTime());
+        copy.setStatus(car.getStatus());
+        return copy;
+    }
 
     public String getSerialNumber() {
         return serialNumber;

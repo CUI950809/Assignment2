@@ -29,6 +29,23 @@ public class CarRepository {
         getFromCSV();
     }
 
+    public static void save() {
+        FileIO.writeFile(CAR_LIST);
+    }
+
+    public static int update(Car car) {
+        if (!SERIAL_NO_2_CAR.containsKey(car.getSerialNumber())) {
+            return 0;
+        }
+        for (int i = 0; i < CAR_LIST.size(); i++) {
+            if (CAR_LIST.get(i).getSerialNumber().equals(car.getSerialNumber())) {
+                CAR_LIST.set(i, car);
+            }
+        }
+        save();
+        return 1;
+    }
+
     public static List<Car> getCarList() {
         return CAR_LIST;
     }
@@ -50,7 +67,7 @@ public class CarRepository {
     }
 
     private static void getFromCSV(){
-        CAR_LIST.addAll(FileIO.readFile("CarInfo.csv"));
+        CAR_LIST.addAll(FileIO.readFile());
         SERIAL_NO_2_CAR.putAll(CAR_LIST.stream().collect(Collectors.toMap(Car::getSerialNumber, car -> car)));
     }
 }
