@@ -312,11 +312,21 @@ public class DetailMngFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Input 'City' is illegal: should not contains ','", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        this.car.setStatus(radioAvailable.isSelected() ? "available" : "unavailable");
-        this.car.setMaintain(expiredCheckBox.isSelected() ? "expired" : "unexpired");
-        this.car.setCity(txtCity.getText());
-        this.car.setSeatNumber(seatNum);
-        int result = CarRepository.update(car);
+        Car modified = this.car.clone();
+        modified.setStatus(radioAvailable.isSelected() ? "available" : "unavailable");
+        modified.setMaintain(expiredCheckBox.isSelected() ? "expired" : "unexpired");
+        modified.setCity(txtCity.getText());
+        modified.setSeatNumber(seatNum);
+
+        if (modified.getStatus().equals(this.car.getStatus())
+            && modified.getMaintain().equals(this.car.getMaintain())
+            && modified.getCity().equals(this.car.getCity())
+            && modified.getSeatNumber() == this.car.getSeatNumber()) {
+            JOptionPane.showMessageDialog(null, "Nothing changed!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int result = CarRepository.update(modified);
         if (result == 1) {
             JOptionPane.showMessageDialog(null, "Save success!", "", JOptionPane.INFORMATION_MESSAGE);
         }
