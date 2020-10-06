@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * @author wangcong
  */
-public class Car {
+public class Car implements Cloneable {
     private String serialNumber;
     private String brand;
     private int seatNumber;
@@ -22,21 +22,19 @@ public class Car {
     private String updateTime;
     private String status;
 
-    public static Car copyFrom(Car car) {
-        if (car == null) {
-            return null;
-        }
+    @Override
+    public Car clone() {
         Car copy = new Car();
-        copy.setSerialNumber(car.getSerialNumber());
-        copy.setBrand(car.getBrand());
-        copy.setSeatNumber(car.getSeatNumber());
-        copy.setModelNumber(car.getModelNumber());
-        copy.setManufacturers(car.getManufacturers());
-        copy.setManufacturerYear(car.getManufacturerYear());
-        copy.setCity(car.getCity());
-        copy.setMaintain(car.getMaintain());
-        copy.setUpdateTime(car.getUpdateTime());
-        copy.setStatus(car.getStatus());
+        copy.setSerialNumber(this.getSerialNumber());
+        copy.setBrand(this.getBrand());
+        copy.setSeatNumber(this.getSeatNumber());
+        copy.setModelNumber(this.getModelNumber());
+        copy.setManufacturers(this.getManufacturers());
+        copy.setManufacturerYear(this.getManufacturerYear());
+        copy.setCity(this.getCity());
+        copy.setMaintain(this.getMaintain());
+        copy.setUpdateTime(this.getUpdateTime());
+        copy.setStatus(this.getStatus());
         return copy;
     }
 

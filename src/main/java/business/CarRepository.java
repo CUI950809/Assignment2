@@ -7,7 +7,9 @@ package business;
 
 import util.FileIO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,6 +39,7 @@ public class CarRepository {
         if (!SERIAL_NO_2_CAR.containsKey(car.getSerialNumber())) {
             return 0;
         }
+        car.setUpdateTime(new SimpleDateFormat("MM-dd-yyyy").format(new Date()));
         for (int i = 0; i < CAR_LIST.size(); i++) {
             if (CAR_LIST.get(i).getSerialNumber().equals(car.getSerialNumber())) {
                 CAR_LIST.set(i, car);

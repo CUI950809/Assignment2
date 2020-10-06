@@ -8,6 +8,8 @@ package interfaces;
 import business.Car;
 import business.CarRepository;
 
+import javax.swing.*;
+
 /**
  *
  * @author wangcong
@@ -15,14 +17,12 @@ import business.CarRepository;
 public class DetailMngFrame extends javax.swing.JFrame {
 
     private Car car;
-    private Car modified;
 
     /**
      * Creates new form DetailMngFrame
      */
     public DetailMngFrame(Car car) {
         this.car = car;
-        this.modified = Car.copyFrom(car);
         initComponents();
         if (car == null) {
             return;
@@ -76,7 +76,7 @@ public class DetailMngFrame extends javax.swing.JFrame {
         radioAvailable = new javax.swing.JRadioButton();
         btnSave = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -112,6 +112,18 @@ public class DetailMngFrame extends javax.swing.JFrame {
 
         lblmanufactureYear.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         lblmanufactureYear.setText("Manufacture Year:");
+
+        txtModelNumber.setEditable(false);
+
+        txtSerialNumber.setEditable(false);
+
+        txtBrand.setEditable(false);
+
+        txtManufacturers.setEditable(false);
+
+        txtManufactureYear.setEditable(false);
+
+        txtUpdate.setEditable(false);
 
         unexpiredCheckBox.setText("Unexpired");
         unexpiredCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -269,31 +281,41 @@ public class DetailMngFrame extends javax.swing.JFrame {
     private void radioUnavailableStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_radioUnavailableStateChanged
         // TODO add your handling code here:
         radioAvailable.setSelected(!radioUnavailable.isSelected());
-        modified.setStatus(radioAvailable.isSelected() ? "available" : "unavailable");
     }//GEN-LAST:event_radioUnavailableStateChanged
 
     private void radioAvailableStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_radioAvailableStateChanged
         // TODO add your handling code here:
         radioUnavailable.setSelected(!radioAvailable.isSelected());
-        modified.setStatus(radioAvailable.isSelected() ? "available" : "unavailable");
     }//GEN-LAST:event_radioAvailableStateChanged
 
     private void unexpiredCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_unexpiredCheckBoxStateChanged
         // TODO add your handling code here:
         expiredCheckBox.setSelected(!unexpiredCheckBox.isSelected());
-        modified.setMaintain(expiredCheckBox.isSelected() ? "expired" : "unexpired");
     }//GEN-LAST:event_unexpiredCheckBoxStateChanged
 
     private void expiredCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_expiredCheckBoxStateChanged
         // TODO add your handling code here:
         unexpiredCheckBox.setSelected(!expiredCheckBox.isSelected());
-        modified.setMaintain(expiredCheckBox.isSelected() ? "expired" : "unexpired");
     }//GEN-LAST:event_expiredCheckBoxStateChanged
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
         // TODO add your handling code here:
-        this.car = this.modified;
-        CarRepository.update(car);
+        int seatNum;
+        try {
+            seatNum = Integer.parseInt(txtSeatNum.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Input 'Seat Number' is illegal!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        this.car.setStatus(radioAvailable.isSelected() ? "available" : "unavailable");
+        this.car.setMaintain(expiredCheckBox.isSelected() ? "expired" : "unexpired");
+        this.car.setCity(txtCity.getText());
+        this.car.setSeatNumber(seatNum);
+        int result = CarRepository.update(car);
+        if (result == 1) {
+            JOptionPane.showMessageDialog(null, "Save success!", "", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnSaveMouseClicked
 
     /**
@@ -303,7 +325,7 @@ public class DetailMngFrame extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -326,7 +348,10 @@ public class DetailMngFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DetailMngFrame(CarRepository.selectBySerialNum("1")).setVisible(true);
+                DetailMngFrame detailMngFrame = new DetailMngFrame(CarRepository.selectBySerialNum("1"));
+                detailMngFrame.setLocationRelativeTo(null);
+                detailMngFrame.setLayout(null);
+                detailMngFrame.setVisible(true);
             }
         });
     }
