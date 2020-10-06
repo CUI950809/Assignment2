@@ -109,32 +109,34 @@ public class SelectFrame extends javax.swing.JFrame {
         lblWhetherMaintain.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         lblWhetherMaintain.setText("Whether Maintain");
 
-        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "available", "unavailable" }));
+        statusComboBox
+            .setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"All", "available", "unavailable"}));
         statusComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusComboBoxActionPerformed(evt);
             }
         });
 
-        brandComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Item 2", "Item 3", "Item 4" }));
+        brandComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarRepository.getBrands())));
 
-        cityComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Shanghai", "Beijing", "Hangzhou", "Guangzhou", "Nanjing" }));
+        cityComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarRepository.getCities())));
         cityComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cityComboBoxActionPerformed(evt);
             }
         });
 
-        manufacturersComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Item 2", "Item 3", "Item 4" }));
+        manufacturersComboBox
+            .setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarRepository.getManufacturers())));
 
-        seatNumberMinComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "2", "4", "5", "7" }));
+        seatNumberMinComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "2", "4", "5", "7"}));
         seatNumberMinComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seatNumberMinComboBoxActionPerformed(evt);
             }
         });
 
-        maintainComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unexpired", "expired" }));
+        maintainComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"All", "unexpired", "expired"}));
 
         txtUpdateTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +144,7 @@ public class SelectFrame extends javax.swing.JFrame {
             }
         });
 
-        seatNumberMaxComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "2", "4", "5", "7" }));
+        seatNumberMaxComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "2", "4", "5", "7"}));
 
         lblTo.setText("to");
 
