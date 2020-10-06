@@ -54,16 +54,16 @@
                       <Component id="lblStatus" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="lblSerialNumber" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="statusCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="statusCheckBoxAvailable" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
+                          <Component id="statusCheckBoxUnavailable" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="lblManufacturers" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="txtSerialNumber" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtManufacturers" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblSeatNumber" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="lblUpdateTime" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
-                      <Component id="txtManufacturers1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtSeatNum" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtUpdate" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="91" max="32767" attributes="0"/>
@@ -100,8 +100,8 @@
                           <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="statusCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="statusCheckBoxAvailable" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="statusCheckBoxUnavailable" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblSerialNumber" min="-2" max="-2" attributes="0"/>
@@ -114,8 +114,8 @@
                           <Component id="txtModelNumber" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblBrand" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtBrand" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="txtBrand" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -135,7 +135,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtManufacturers1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtSeatNum" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="unexpiredCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="expiredCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -243,12 +243,12 @@
             <Property name="text" type="java.lang.String" value="Manufacture Year:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="statusCheckBox">
+        <Component class="javax.swing.JCheckBox" name="statusCheckBoxAvailable">
           <Properties>
             <Property name="text" type="java.lang.String" value="availbale"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+        <Component class="javax.swing.JCheckBox" name="statusCheckBoxUnavailable">
           <Properties>
             <Property name="text" type="java.lang.String" value="unavailbale"/>
           </Properties>
@@ -263,7 +263,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtCity">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtManufacturers1">
+        <Component class="javax.swing.JTextField" name="txtSeatNum">
         </Component>
         <Component class="javax.swing.JTextField" name="txtManufactureYear">
         </Component>

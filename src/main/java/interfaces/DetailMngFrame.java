@@ -5,17 +5,39 @@
  */
 package interfaces;
 
+import business.Car;
+
+import javax.swing.*;
+
 /**
  *
  * @author wangcong
  */
 public class DetailMngFrame extends javax.swing.JFrame {
 
+    private final Car car;
+
     /**
      * Creates new form DetailMngFrame
      */
-    public DetailMngFrame() {
+    public DetailMngFrame(Car car) {
+        this.car = car;
         initComponents();
+        if (car == null) {
+            return;
+        }
+        statusCheckBoxAvailable.setSelected("available".equals(car.getStatus()));
+        statusCheckBoxUnavailable.setSelected("unavailable".equals(car.getStatus()));
+        txtModelNumber.setText(car.getModelNumber());
+        txtSerialNumber.setText(car.getSerialNumber());
+        txtBrand.setText(car.getBrand());
+        txtManufacturers.setText(car.getManufacturers());
+        txtCity.setText(car.getCity());
+        txtSeatNum.setText(car.getSeatNumber() + "");
+        expiredCheckBox.setSelected("expired".equals(car.getMaintain()));
+        unexpiredCheckBox.setSelected("unexpired".equals(car.getMaintain()));
+        txtUpdate.setText(car.getUpdateTime());
+        txtManufactureYear.setText(car.getManufacturerYear());
     }
 
     /**
@@ -39,20 +61,20 @@ public class DetailMngFrame extends javax.swing.JFrame {
         lblWhetherMaintain = new javax.swing.JLabel();
         lblUpdateTime = new javax.swing.JLabel();
         lblmanufactureYear = new javax.swing.JLabel();
-        statusCheckBox = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        statusCheckBoxAvailable = new javax.swing.JCheckBox();
+        statusCheckBoxUnavailable = new javax.swing.JCheckBox();
         txtModelNumber = new javax.swing.JTextField();
         txtSerialNumber = new javax.swing.JTextField();
         txtBrand = new javax.swing.JTextField();
         txtManufacturers = new javax.swing.JTextField();
         txtCity = new javax.swing.JTextField();
-        txtManufacturers1 = new javax.swing.JTextField();
+        txtSeatNum = new javax.swing.JTextField();
         txtManufactureYear = new javax.swing.JTextField();
         txtUpdate = new javax.swing.JTextField();
         unexpiredCheckBox = new javax.swing.JCheckBox();
         expiredCheckBox = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -89,9 +111,9 @@ public class DetailMngFrame extends javax.swing.JFrame {
         lblmanufactureYear.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         lblmanufactureYear.setText("Manufacture Year:");
 
-        statusCheckBox.setText("availbale");
+        statusCheckBoxAvailable.setText("availbale");
 
-        jCheckBox2.setText("unavailbale");
+        statusCheckBoxUnavailable.setText("unavailbale");
 
         unexpiredCheckBox.setText("Unexpired");
 
@@ -111,15 +133,15 @@ public class DetailMngFrame extends javax.swing.JFrame {
                     .addComponent(lblStatus)
                     .addComponent(lblSerialNumber)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(statusCheckBox)
+                        .addComponent(statusCheckBoxAvailable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox2))
+                        .addComponent(statusCheckBoxUnavailable))
                     .addComponent(lblManufacturers)
                     .addComponent(txtSerialNumber)
                     .addComponent(txtManufacturers)
                     .addComponent(lblSeatNumber)
                     .addComponent(lblUpdateTime, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtManufacturers1)
+                    .addComponent(txtSeatNum)
                     .addComponent(txtUpdate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,8 +172,8 @@ public class DetailMngFrame extends javax.swing.JFrame {
                         .addComponent(lblStatus)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(statusCheckBox)
-                            .addComponent(jCheckBox2))
+                            .addComponent(statusCheckBoxAvailable)
+                            .addComponent(statusCheckBoxUnavailable))
                         .addGap(18, 18, 18)
                         .addComponent(lblSerialNumber)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -162,8 +184,8 @@ public class DetailMngFrame extends javax.swing.JFrame {
                         .addComponent(txtModelNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblBrand)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblManufacturers)
@@ -178,7 +200,7 @@ public class DetailMngFrame extends javax.swing.JFrame {
                     .addComponent(lblWhetherMaintain))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtManufacturers1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSeatNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(unexpiredCheckBox)
                     .addComponent(expiredCheckBox))
                 .addGap(33, 33, 33)
@@ -236,14 +258,13 @@ public class DetailMngFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DetailMngFrame().setVisible(true);
+                new DetailMngFrame(new Car()).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox expiredCheckBox;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBrand;
@@ -256,13 +277,14 @@ public class DetailMngFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblUpdateTime;
     private javax.swing.JLabel lblWhetherMaintain;
     private javax.swing.JLabel lblmanufactureYear;
-    private javax.swing.JCheckBox statusCheckBox;
+    private javax.swing.JCheckBox statusCheckBoxAvailable;
+    private javax.swing.JCheckBox statusCheckBoxUnavailable;
     private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtManufactureYear;
     private javax.swing.JTextField txtManufacturers;
-    private javax.swing.JTextField txtManufacturers1;
     private javax.swing.JTextField txtModelNumber;
+    private javax.swing.JTextField txtSeatNum;
     private javax.swing.JTextField txtSerialNumber;
     private javax.swing.JTextField txtUpdate;
     private javax.swing.JCheckBox unexpiredCheckBox;

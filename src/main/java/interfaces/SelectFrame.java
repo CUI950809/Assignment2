@@ -6,11 +6,10 @@
 package interfaces;
 
 import business.Car;
-import business.CarList;
+import business.CarRepository;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +18,7 @@ import java.util.Set;
  */
 public class SelectFrame extends javax.swing.JFrame {
 
-    private CarList carArrayList;
+    private CarRepository carArrayList;
 
     /**
      * Creates new form SelectFrame
@@ -118,9 +117,9 @@ public class SelectFrame extends javax.swing.JFrame {
             }
         });
 
-        brandComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarList.getBrands())));
+        brandComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarRepository.getBrands())));
 
-        cityComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarList.getCities())));
+        cityComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarRepository.getCities())));
         cityComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cityComboBoxActionPerformed(evt);
@@ -128,7 +127,7 @@ public class SelectFrame extends javax.swing.JFrame {
         });
 
         manufacturersComboBox
-            .setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarList.getManufacturers())));
+            .setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarRepository.getManufacturers())));
 
         seatNumberMinComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "2", "4", "5", "7"}));
         seatNumberMinComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -381,7 +380,7 @@ public class SelectFrame extends javax.swing.JFrame {
         String modelNumber = txtModelNumber.getText();
         String manufactureYear = txtManufactureYear.getText();
 
-        List<Car> fromCsvList = CarList.getCarList();
+        List<Car> fromCsvList = CarRepository.getCarList();
         List<Car> toTableList = new ArrayList();
         // question1
         for (Car car : fromCsvList) {

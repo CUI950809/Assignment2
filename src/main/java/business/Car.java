@@ -11,7 +11,6 @@ package business;
 public class Car {
     private String serialNumber;
     private String brand;
-    private String year;
     private int seatNumber;
     private String modelNumber;
     private String manufacturers;
@@ -35,14 +34,6 @@ public class Car {
 
     public void setBrand(String brand) {
         this.brand = brand;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
     }
 
     public int getSeatNumber() {

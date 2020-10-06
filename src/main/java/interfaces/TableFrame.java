@@ -6,6 +6,7 @@
 package interfaces;
 
 import business.Car;
+import business.CarRepository;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +26,7 @@ public class TableFrame extends javax.swing.JFrame {
      * Creates new form TableFrame
      * @param toTableList
      */
-    private List<Car> toTableList;
+    private final List<Car> toTableList;
 
     public TableFrame(List<Car> toTableList) {
         initComponents();
@@ -79,12 +80,12 @@ public class TableFrame extends javax.swing.JFrame {
         txtUnavailable = new javax.swing.JTextField();
         btnViewDetails = new javax.swing.JButton();
 
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tblPanel.setBackground(new java.awt.Color(153, 204, 255));
 
         showTbl.setBackground(new java.awt.Color(153, 204, 255));
-        showTbl.setModel(new DefaultTableModel(
+        showTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -127,6 +128,11 @@ public class TableFrame extends javax.swing.JFrame {
         });
 
         btnViewDetails.setText("Details");
+        btnViewDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnViewDetailsMouseClicked(evt);
+            }
+        });
         btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewDetailsActionPerformed(evt);
@@ -147,7 +153,7 @@ public class TableFrame extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(41, 41, 41)
                         .addGroup(tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCurrentAvailable, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addComponent(txtCurrentAvailable)
                             .addComponent(txtUnavailable))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnViewDetails)))
@@ -202,6 +208,20 @@ public class TableFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnViewDetailsActionPerformed
 
+    private void btnViewDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewDetailsMouseClicked
+        // TODO add your handling code here:
+        int index = showTbl.getSelectedRow();
+        if (index == -1) {
+            return;
+        }
+        String serialNo = showTbl.getValueAt(index, 0).toString();
+        Car car = CarRepository.selectBySerialNum(serialNo);
+        DetailMngFrame detailMngFrame = new DetailMngFrame(car);
+        detailMngFrame.setLocationRelativeTo(null);
+        detailMngFrame.setLayout(null);
+        detailMngFrame.setVisible(true);
+    }//GEN-LAST:event_btnViewDetailsMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -232,7 +252,10 @@ public class TableFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TableFrame(new ArrayList<>()).setVisible(true);
+                TableFrame tableFrame = new TableFrame(CarRepository.getCarList());
+                tableFrame.setLocationRelativeTo(null);
+                tableFrame.setLayout(null);
+                tableFrame.setVisible(true);
             }
         });
     }

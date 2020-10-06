@@ -28,7 +28,7 @@ public class FileIO {
                 car.setSerialNumber(fieldNames[0]);
                 car.setStatus(fieldNames[1]);
                 car.setBrand(fieldNames[2]);
-                car.setYear(fieldNames[3]);
+                car.setManufacturerYear(fieldNames[3]);
                 car.setSeatNumber(Integer.parseInt(fieldNames[4]));
                 car.setModelNumber(fieldNames[5]);
                 car.setManufacturers(fieldNames[6]);
