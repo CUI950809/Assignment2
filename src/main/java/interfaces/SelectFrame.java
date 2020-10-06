@@ -397,13 +397,13 @@ public class SelectFrame extends javax.swing.JFrame {
             if (!maintain.equals("All") && !maintain.equals(car.getMaintain())) {
                 continue;
             }
-            if (StringUtils.isEmpty(serialNumber) && !serialNumber.equals(car.getSerialNumber())) {
+            if (StringUtils.isNotEmpty(serialNumber) && !serialNumber.equals(car.getSerialNumber())) {
                 continue;
             }
-            if (StringUtils.isEmpty(modelNumber) && !modelNumber.equals(car.getModelNumber())) {
+            if (StringUtils.isNotEmpty(modelNumber) && !modelNumber.equals(car.getModelNumber())) {
                 continue;
             }
-            if (StringUtils.isEmpty(manufactureYear) && !manufactureYear.equals(car.getManufacturerYear())) {
+            if (StringUtils.isNotEmpty(manufactureYear) && !manufactureYear.equals(car.getManufacturerYear())) {
                 continue;
             }
             if (!"...".equals(seatNumberMin)) {
