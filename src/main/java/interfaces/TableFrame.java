@@ -80,7 +80,7 @@ public class TableFrame extends javax.swing.JFrame {
         txtUnavailable = new javax.swing.JTextField();
         btnViewDetails = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         tblPanel.setBackground(new java.awt.Color(153, 204, 255));
 
