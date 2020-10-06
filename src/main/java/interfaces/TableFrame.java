@@ -5,6 +5,16 @@
  */
 package interfaces;
 
+import business.Car;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 /**
  *
  * @author wangcong
@@ -13,10 +23,43 @@ public class TableFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form TableFrame
+     * @param toTableList
      */
-    public TableFrame() {
+    private List<Car> toTableList;
+
+    public TableFrame(List<Car> toTableList) {
         initComponents();
+        this.toTableList = toTableList;
+        //getToTableList();
+        populateTable();
+
+        int availableNumber = (int) toTableList.stream().filter(car -> car.getStatus().equals("available")).count();
+        txtCurrentAvailable.setText("" + availableNumber);
+        int unavailable = (int) toTableList.stream().filter(car -> car.getStatus().equals("unavailable")).count();
+        txtUnavailable.setText("" + unavailable);
     }
+
+    private void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel)showTbl.getModel();
+        dtm.setRowCount(0);
+
+        for (Car car: toTableList){
+            Object row[] = new Object[4];
+            row[0] = car.getSerialNumber();
+            row[1] = car.getBrand();
+            row[2] = car.getCity();
+            row[3] = car.getStatus();
+            dtm.addRow(row);
+        }
+    }
+
+//    public List<Car> getToTableList() {
+//        return toTableList;
+//    }
+//
+//    public void setToTableList(List<Car> toTableList) {
+//        this.toTableList = toTableList;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,24 +73,65 @@ public class TableFrame extends javax.swing.JFrame {
         tblPanel = new javax.swing.JPanel();
         scrollPanel = new javax.swing.JScrollPane();
         showTbl = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtCurrentAvailable = new javax.swing.JTextField();
+        txtUnavailable = new javax.swing.JTextField();
+        btnViewDetails = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         tblPanel.setBackground(new java.awt.Color(153, 204, 255));
 
         showTbl.setBackground(new java.awt.Color(153, 204, 255));
-        showTbl.setModel(new javax.swing.table.DefaultTableModel(
+        showTbl.setModel(new DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "SerialNumber", "Brand", "City", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         scrollPanel.setViewportView(showTbl);
+        if (showTbl.getColumnModel().getColumnCount() > 0) {
+            showTbl.getColumnModel().getColumn(0).setResizable(false);
+            showTbl.getColumnModel().getColumn(1).setResizable(false);
+            showTbl.getColumnModel().getColumn(2).setResizable(false);
+            showTbl.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jLabel1.setText("Currently Available Car:");
+
+        jLabel2.setText("Unavailable Car:");
+
+        txtCurrentAvailable.setEditable(false);
+        txtCurrentAvailable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCurrentAvailableActionPerformed(evt);
+            }
+        });
+
+        txtUnavailable.setEditable(false);
+        txtUnavailable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUnavailableActionPerformed(evt);
+            }
+        });
+
+        btnViewDetails.setText("Details");
+        btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewDetailsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout tblPanelLayout = new javax.swing.GroupLayout(tblPanel);
         tblPanel.setLayout(tblPanelLayout);
@@ -55,15 +139,35 @@ public class TableFrame extends javax.swing.JFrame {
             tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tblPanelLayout.createSequentialGroup()
                 .addGap(73, 73, 73)
-                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(tblPanelLayout.createSequentialGroup()
+                        .addGroup(tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(41, 41, 41)
+                        .addGroup(tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCurrentAvailable, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addComponent(txtUnavailable))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnViewDetails)))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         tblPanelLayout.setVerticalGroup(
             tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tblPanelLayout.createSequentialGroup()
                 .addContainerGap(43, Short.MAX_VALUE)
-                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtCurrentAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewDetails))
+                .addGap(20, 20, 20)
+                .addGroup(tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtUnavailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -79,6 +183,24 @@ public class TableFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCurrentAvailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCurrentAvailableActionPerformed
+        // TODO add your handling code here:
+        int availableNumber = Collections.frequency(toTableList,"available");
+        System.out.println(availableNumber);
+        txtCurrentAvailable.setText(""+availableNumber);
+    }//GEN-LAST:event_txtCurrentAvailableActionPerformed
+
+    private void txtUnavailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnavailableActionPerformed
+        // TODO add your handling code here:
+        int unavailableNumber = Collections.frequency(toTableList,"unavailable");
+        txtUnavailable.setText(""+unavailableNumber);
+    }//GEN-LAST:event_txtUnavailableActionPerformed
+
+    private void btnViewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailsActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btnViewDetailsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,14 +232,19 @@ public class TableFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TableFrame().setVisible(true);
+                new TableFrame(new ArrayList<>()).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnViewDetails;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JTable showTbl;
     private javax.swing.JPanel tblPanel;
+    private javax.swing.JTextField txtCurrentAvailable;
+    private javax.swing.JTextField txtUnavailable;
     // End of variables declaration//GEN-END:variables
 }

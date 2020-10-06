@@ -18,6 +18,7 @@ import java.util.Set;
  * @author wangcong
  */
 public class SelectFrame extends javax.swing.JFrame {
+
     private CarList carArrayList;
 
     /**
@@ -109,7 +110,8 @@ public class SelectFrame extends javax.swing.JFrame {
         lblWhetherMaintain.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         lblWhetherMaintain.setText("Whether Maintain");
 
-        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"All", "available", "unavailable"}));
+        statusComboBox
+            .setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"All", "available", "unavailable"}));
         statusComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusComboBoxActionPerformed(evt);
@@ -125,7 +127,8 @@ public class SelectFrame extends javax.swing.JFrame {
             }
         });
 
-        manufacturersComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarList.getManufacturers())));
+        manufacturersComboBox
+            .setModel(new javax.swing.DefaultComboBoxModel<>(setAddAllToArray(CarList.getManufacturers())));
 
         seatNumberMinComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"...", "2", "4", "5", "7"}));
         seatNumberMinComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -378,10 +381,10 @@ public class SelectFrame extends javax.swing.JFrame {
         String modelNumber = txtModelNumber.getText();
         String manufactureYear = txtManufactureYear.getText();
 
-        List<Car> toTableList = CarList.getCarList();
-        List<Car> tempList = new ArrayList();
+        List<Car> fromCsvList = CarList.getCarList();
+        List<Car> toTableList = new ArrayList();
         // question1
-        for (Car car : toTableList) {
+        for (Car car : fromCsvList) {
             if (!status.equals("All") && !status.equals(car.getStatus())) {
                 continue;
             }
@@ -418,8 +421,14 @@ public class SelectFrame extends javax.swing.JFrame {
                     continue;
                 }
             }
-            tempList.add(car);
+            toTableList.add(car);
         }
+
+        TableFrame tableFrame = new TableFrame(toTableList);
+        //tableFrame.setToTableList(toTableList);
+        tableFrame.setLocationRelativeTo(null);
+        tableFrame.setLayout(null);
+        tableFrame.setVisible(true);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
@@ -456,7 +465,10 @@ public class SelectFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SelectFrame().setVisible(true);
+                SelectFrame selectFrame = new SelectFrame();
+                selectFrame.setLocationRelativeTo(null);
+                selectFrame.setLayout(null);
+                selectFrame.setVisible(true);
             }
         });
     }
