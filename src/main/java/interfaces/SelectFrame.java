@@ -109,7 +109,7 @@ public class SelectFrame extends javax.swing.JFrame {
         lblWhetherMaintain.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         lblWhetherMaintain.setText("Whether Maintain");
 
-        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "available", "unavailable" }));
+        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "available", "unavailable" }));
         statusComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusComboBoxActionPerformed(evt);
