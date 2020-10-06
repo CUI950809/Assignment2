@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FileIO {
 
-    private static final String CAR_INFO_CSV = "CarInfo1.csv";
+    private static final String CAR_INFO_CSV = "CarInfo.csv";
 
     public static ArrayList<Car> readFile() {
         ArrayList<Car> data = new ArrayList<>();
