@@ -308,6 +308,10 @@ public class DetailMngFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Input 'Seat Number' is illegal!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (txtCity.getText().contains(",")) {
+            JOptionPane.showMessageDialog(null, "Input 'City' is illegal: should not contains ','", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         this.car.setStatus(radioAvailable.isSelected() ? "available" : "unavailable");
         this.car.setMaintain(expiredCheckBox.isSelected() ? "expired" : "unexpired");
         this.car.setCity(txtCity.getText());
