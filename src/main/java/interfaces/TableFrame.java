@@ -44,7 +44,7 @@ public class TableFrame extends javax.swing.JFrame {
         dtm.setRowCount(0);
 
         for (Car car: toTableList){
-            Object row[] = new Object[4];
+            Object[] row = new Object[4];
             row[0] = car.getSerialNumber();
             row[1] = car.getBrand();
             row[2] = car.getCity();
